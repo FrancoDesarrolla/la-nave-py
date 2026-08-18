@@ -125,7 +125,7 @@ export default function Cargas() {
       });
 
     if (insertError) {
-      setError("No pudimos guardar la carga. Probá de nuevo.");
+      setError(`No pudimos guardar la carga: ${insertError.message}`);
       setGuardando(false);
       return;
     }

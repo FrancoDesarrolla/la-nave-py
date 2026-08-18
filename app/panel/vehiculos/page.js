@@ -63,7 +63,7 @@ export default function Vehiculos() {
     });
 
     if (insertError) {
-      setError("No pudimos guardar el vehículo. Probá de nuevo.");
+      setError(`No pudimos guardar el vehículo: ${insertError.message}`);
       setGuardando(false);
       return;
     }
