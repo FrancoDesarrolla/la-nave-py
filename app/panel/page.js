@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { supabase } from "@/lib/supabaseClient";
 import styles from "./panel.module.css";
 
@@ -48,20 +49,18 @@ export default function Panel() {
       </div>
 
       <div className={styles.grid}>
-        <div className={styles.card}>
-          <span className={styles.badge}>Próximamente</span>
-          <h3 className={styles.cardTitle}>Registrar carga</h3>
+        <Link href="/panel/cargas" className={styles.card}>
+          <h3 className={styles.cardTitle}>⛽ Registrar carga</h3>
           <p className={styles.cardCopy}>
             Litros, precio, kilometraje y estación de servicio.
           </p>
-        </div>
-        <div className={styles.card}>
-          <span className={styles.badge}>Próximamente</span>
-          <h3 className={styles.cardTitle}>Mis vehículos</h3>
+        </Link>
+        <Link href="/panel/vehiculos" className={styles.card}>
+          <h3 className={styles.cardTitle}>🚗 Mis vehículos</h3>
           <p className={styles.cardCopy}>
             Agregá marca, modelo y año de tu auto.
           </p>
-        </div>
+        </Link>
         <div className={styles.card}>
           <span className={styles.badge}>Próximamente</span>
           <h3 className={styles.cardTitle}>Ganancias</h3>
