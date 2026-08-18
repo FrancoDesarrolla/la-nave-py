@@ -59,7 +59,7 @@ export default function Vehiculos() {
       usuario_id: userId,
       marca,
       modelo,
-      anio: anio ? Number(anio) : null,
+      año: anio ? Number(anio) : null,
     });
 
     if (insertError) {
@@ -176,8 +176,8 @@ export default function Vehiculos() {
                 <span className={styles.listItemTitle}>
                   {v.marca} {v.modelo}
                 </span>
-                {v.anio && (
-                  <span className={styles.listItemSub}>Año {v.anio}</span>
+                {v.año && (
+                  <span className={styles.listItemSub}>Año {v.año}</span>
                 )}
               </div>
             </div>
