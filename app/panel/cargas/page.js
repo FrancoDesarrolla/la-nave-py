@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { supabase } from "@/lib/supabaseClient";
+import { ensureUserProfile } from "@/lib/ensureProfile";
 import styles from "../panel-inner.module.css";
 
 export default function Cargas() {
@@ -31,11 +32,12 @@ export default function Cargas() {
   const [okMessage, setOkMessage] = useState("");
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
       if (!session) {
         router.replace("/");
         return;
       }
+      await ensureUserProfile(session.user);
       setUserId(session.user.id);
       setChecking(false);
       cargarDatos(session.user.id);

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
+import { ensureUserProfile } from "@/lib/ensureProfile";
 import FuelGauge from "./components/FuelGauge";
 import styles from "./page.module.css";
 
@@ -34,12 +35,17 @@ export default function AuthPage() {
         return;
       }
 
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      await ensureUserProfile(user);
+
       router.push("/panel");
       return;
     }
 
     // Registro
-    const { data, error: signUpError } = await supabase.auth.signUp({
+    const { error: signUpError } = await supabase.auth.signUp({
       email,
       password,
     });
@@ -48,19 +54,6 @@ export default function AuthPage() {
       setError(traducirError(signUpError.message));
       setLoading(false);
       return;
-    }
-
-    if (data?.user) {
-      const { error: perfilError } = await supabase.from("usuarios").insert({
-        id: data.user.id,
-        email,
-        nombre,
-        modulo_plataformas_activo: false,
-      });
-
-      if (perfilError) {
-        console.error(perfilError);
-      }
     }
 
     setOkMessage(

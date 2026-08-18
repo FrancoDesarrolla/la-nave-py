@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { supabase } from "@/lib/supabaseClient";
+import { ensureUserProfile } from "@/lib/ensureProfile";
 import styles from "./panel.module.css";
 
 export default function Panel() {
@@ -12,11 +13,12 @@ export default function Panel() {
   const [email, setEmail] = useState("");
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
       if (!session) {
         router.replace("/");
         return;
       }
+      await ensureUserProfile(session.user);
       setEmail(session.user.email);
       setChecking(false);
     });
