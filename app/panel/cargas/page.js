@@ -55,7 +55,7 @@ export default function Cargas() {
           .eq("usuario_id", uid),
         supabase
           .from("estaciones_servicio")
-          .select("id, nombre_emblema, direccion")
+          .select("id, nombre_emblema, direccion_o_referencia")
           .order("nombre_emblema", { ascending: true }),
         supabase
           .from("cargas_combustible")
@@ -80,7 +80,7 @@ export default function Cargas() {
       .from("estaciones_servicio")
       .insert({
         nombre_emblema: nuevoEmblema,
-        direccion: nuevaDireccion,
+        direccion_o_referencia: nuevaDireccion,
       })
       .select()
       .single();
@@ -221,7 +221,7 @@ export default function Cargas() {
                   <option value="">Elegí una estación</option>
                   {estaciones.map((e) => (
                     <option key={e.id} value={e.id}>
-                      {e.nombre_emblema} — {e.direccion}
+                      {e.nombre_emblema} — {e.direccion_o_referencia}
                     </option>
                   ))}
                 </select>

@@ -63,20 +63,18 @@ export default function Panel() {
             Agregá marca, modelo y año de tu auto.
           </p>
         </Link>
-        <div className={styles.card}>
-          <span className={styles.badge}>Próximamente</span>
-          <h3 className={styles.cardTitle}>Ganancias</h3>
+        <Link href="/panel/ganancias" className={styles.card}>
+          <h3 className={styles.cardTitle}>💰 Ganancias</h3>
           <p className={styles.cardCopy}>
             Activá el seguimiento de tus ingresos por plataforma.
           </p>
-        </div>
-        <div className={styles.card}>
-          <span className={styles.badge}>Próximamente</span>
-          <h3 className={styles.cardTitle}>Precios cerca de mí</h3>
+        </Link>
+        <Link href="/panel/precios" className={styles.card}>
+          <h3 className={styles.cardTitle}>📍 Precios cerca de mí</h3>
           <p className={styles.cardCopy}>
             Precios reportados por la comunidad de conductores.
           </p>
-        </div>
+        </Link>
       </div>
     </div>
   );
