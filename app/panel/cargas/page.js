@@ -86,7 +86,11 @@ export default function Cargas() {
       .single();
 
     if (insertError || !data) {
-      setError("No pudimos agregar la estación. Probá de nuevo.");
+      setError(
+        `No pudimos agregar la estación: ${
+          insertError?.message || "sin datos devueltos"
+        }`
+      );
       return;
     }
 
